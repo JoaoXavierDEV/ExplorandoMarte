@@ -2,6 +2,7 @@
 {
     public class Rover
     {
+        public string Nome { get; private set; }
         private int x;
         private int y;
         private char direction;
@@ -67,6 +68,11 @@
         public string GetPosition()
         {
             return $"{x} {y} {direction}";
+        }
+
+        public override string ToString()
+        {
+            return this.GetPosition();
         }
     }
 }

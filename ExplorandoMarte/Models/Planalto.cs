@@ -26,11 +26,6 @@ namespace ExplorandoMarte.Models
             return $"{CoordenadaX} {CoordenadaY}";
         }
 
-        public override string ToString()
-        {
-            return this.ObterCoordenadasSuperiores();
-        }
-
         /// <summary>
         /// Exibe no console as coordenadas e direções dos rovers.
         /// </summary>
@@ -41,5 +36,12 @@ namespace ExplorandoMarte.Models
                 Console.WriteLine(rover.ToString());
             }
         }
+
+        #region Overrides 
+        public override string ToString()
+        {
+            return this.ObterCoordenadasSuperiores();
+        } 
+        #endregion
     }
 }

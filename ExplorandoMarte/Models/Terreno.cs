@@ -17,7 +17,7 @@
         /// <returns>Coordenadas no formato "X Y".</returns>
         public string ObterTamanhoDoTerreno()
         {
-            return $"{CoordenadaX} {CoordenadaY}";
+            return $"X: {CoordenadaX} Y: {CoordenadaY}";
         }
     }
 }
