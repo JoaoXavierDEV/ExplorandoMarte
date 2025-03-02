@@ -2,6 +2,10 @@
 {
     public abstract class Terreno
     {
+        public string Nome { get; private set; }
+        public const int CoordenadaMinimaX = 0;
+        public const int CoordenadaMinimaY = 0;
+
         public int CoordenadaX { get; }
         public int CoordenadaY { get; }
 

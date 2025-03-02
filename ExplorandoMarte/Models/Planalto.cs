@@ -5,7 +5,7 @@ namespace ExplorandoMarte.Models
 {
     public class Planalto : Terreno
     {
-        public List<Rover> Rovers { get; }
+        public List<Rover> Rovers { get; private set; }
 
         public Planalto(int coordenadaX, int coordenadaY) : base(coordenadaX, coordenadaY)
         {
@@ -16,6 +16,35 @@ namespace ExplorandoMarte.Models
         {
             Rovers = new List<Rover>();
         }
+
+        public void AdicionarRovers(List<Rover> rovers)
+        {
+            rovers.ForEach(rover => AdicionarRover(rover));
+        }
+
+        public void AdicionarRover(Rover rover)
+        {
+            if(Rovers.Exists(x => x.Nome == rover.Nome))
+            {
+                throw new Exception("Já existe um Rover com este nome.");
+            }
+            Rovers.Add(rover);
+        }
+
+        public void RemoverRover(Rover rover)
+        {
+            if (Rovers.Exists(x => x == rover))
+            {
+                Rovers.Remove(rover);
+            }
+        }
+
+
+        public List<string> InformarPosicaoRover()
+        {
+            return Rovers.Select(rover => rover.GetPosition()).ToList();
+        }
+
 
         /// <summary>
         /// Obtém as coordenadas superiores do planalto.
