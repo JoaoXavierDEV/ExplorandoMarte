@@ -83,6 +83,7 @@ O projeto utiliza o padrão de design **Command Pattern** para encapsular as ins
 ### Validação e Tratamento de Erros
 
 O projeto inclui validações para garantir que as coordenadas e direções das sondas sejam válidas e que as sondas não se movam além dos limites do planalto ou para posições já ocupadas por outras sondas. Exceções são lançadas para tratar entradas inválidas e movimentos inválidos.
+Tudo registrado em um arquivo log localizado em "C:\ExplorandoMarte\logs\log.txt"
 
 ## Debugging no VSCode
 
@@ -92,6 +93,8 @@ Para fazer o debugging no VSCode, siga os passos abaixo:
 2. Coloque pontos de interrupção (breakpoints) no código onde deseja inspecionar a execução.
 3. Pressione `F5` ou vá para o menu `Run` e selecione `Start Debugging`.
 4. O VSCode iniciará o projeto e parará nos pontos de interrupção definidos, permitindo que você inspecione variáveis e o fluxo de execução.
+5. Utilize F10 para avançar cada passo.
+6. Utilize F11 para entrar nos métodos e fazer o debug.
 
 ## Pipeline de CI
 
@@ -99,8 +102,16 @@ O pipeline de CI foi configurado para garantir que todas as alterações no cód
 
 ### Configuração do Pipeline
 
-1. O pipeline é configurado usando um arquivo YAML (`.github/workflows/ci.yml` para GitHub Actions, por exemplo).
-2. O pipeline é acionado em cada push ou pull request para o repositório.
+O pipeline de CI está definido no arquivo `.github/workflows/dotnet-desktop.yml` e realiza as seguintes etapas:
+
+1. **Checkout do código**: Faz o checkout do código do repositório.
+2. **Configuração do .NET**: Configura o ambiente .NET com a versão 8.0.x.
+3. **Restaurar dependências**: Restaura as dependências do projeto.
+4. **Build**: Compila o projeto na configuração Release.
+5. **Executar testes**: Executa os testes do projeto.
+6. **Publicar**: Publica o projeto no diretório especificado.
+7. **Upload de artefatos de build**: Faz o upload dos artefatos de build para o GitHub.
+
 
 ### Acompanhando os Resultados
 
@@ -115,5 +126,3 @@ O pipeline de CI foi configurado para garantir que todas as alterações no cód
 - A validação rigorosa garante que as sondas operem dentro dos limites definidos e evitem colisões.
 
 ---
-
-Este README fornece uma visão geral do problema, instruções para configurar e executar o projeto, e uma descrição das decisões de projeto tomadas. Certifique-se de ajustar os detalhes conforme necessário para refletir com precisão o seu projeto.
