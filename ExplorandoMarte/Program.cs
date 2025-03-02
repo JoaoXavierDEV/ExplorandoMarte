@@ -98,8 +98,7 @@ namespace ExplorandoMarte
                                 'R' => new TurnRightCommand(rover),
                                 'M' => new MoveCommand(rover),
                                 _ => throw new ArgumentException("Instrução inválida. As instruções válidas são: L, R, M.")
-                            };
-                            
+                            };                            
 
                             invoker.AddCommand(command);
 
