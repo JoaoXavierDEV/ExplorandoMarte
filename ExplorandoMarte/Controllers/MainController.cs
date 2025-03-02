@@ -16,6 +16,11 @@ namespace ExplorandoMarte.Controllers
             _logger = logger;
         }
 
+        public virtual void InicializarLog()
+        {
+            LimparLog();
+        }
+
         public virtual void RegistrarLog(string mensagem)
         {
             Console.WriteLine(mensagem); _logger.LogMessage(mensagem);

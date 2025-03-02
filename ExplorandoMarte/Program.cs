@@ -1,22 +1,24 @@
-﻿using ExplorandoMarte.Controllers;
+﻿using ExplorandoMarte.Commands;
+using ExplorandoMarte.Controllers;
 using ExplorandoMarte.Interfaces;
+using ExplorandoMarte.Invokers;
 using ExplorandoMarte.Models;
 using System;
 using System.Collections.Generic;
 
-namespace MarsRovers
+namespace ExplorandoMarte
 {
-    public class Program : Controller
+    public class Program //: Controller
     {
-        public Program(ILogger logger) : base(logger)
-        {
-        }
+       // public Program(ILogger logger) : base(logger)
+       // {
+      //  }
 
         public static void Main(string[] args)
         {
             try
             {
-                Controller.Instance.LimparLog();
+                Controller.Instance.InicializarLog();
 
                 Controller.Instance.RegistrarLog("Iniciando a exploração de Marte...");
 
@@ -60,7 +62,6 @@ namespace MarsRovers
                         throw new ArgumentException("Posição Inválida para o Rover.", initialPosition);
                     }
 
-
                     var positionParts = initialPosition.Split(' ');
 
 
@@ -89,11 +90,24 @@ namespace MarsRovers
 
                     Controller.Instance.RegistrarLog("Instruções: " + instructions);
 
+                    var invoker = new CommandInvoker();
+
                     foreach (var instruction in instructions)
                     {
                         try
                         {
-                            rover.ExecutarInstrucao(instruction);
+                            ICommand command = instruction switch
+                            {
+                                'L' => new TurnLeftCommand(rover),
+                                'R' => new TurnRightCommand(rover),
+                                'M' => new MoveCommand(rover),
+                                _ => throw new ArgumentException("Instrução inválida. As instruções válidas são: L, R, M.")
+                            };
+
+                            invoker.AddCommand(command);
+
+                            invoker.ExecuteCommands();
+
                             Controller.Instance.RegistrarLog("Instrução executada: " + instruction);
                         }
                         catch (Exception ex)

@@ -22,7 +22,7 @@ namespace ExplorandoMarte.Models
             ValidateCoordinates(x, y);
             ValidateDirection(direction);
 
-            this.Nome = Guid.NewGuid().ToString().Substring(0,4);
+            this.Nome = Guid.NewGuid().ToString().Substring(0,6).ToUpperInvariant();
             this.PosicaoX = x;
             this.PosicaoY = y;
             this.direction = direction;
@@ -107,7 +107,7 @@ namespace ExplorandoMarte.Models
         /// <summary>
         /// Gira o Rover para a esquerda.
         /// </summary>
-        private void TurnLeft()
+        public void TurnLeft()
         {
             int currentIndex = directions.IndexOf(direction);
             int newIndex = (currentIndex - 1 + directions.Count) % directions.Count;
@@ -117,7 +117,7 @@ namespace ExplorandoMarte.Models
         /// <summary>
         /// Gira o Rover para a direita.
         /// </summary>
-        private void TurnRight()
+        public void TurnRight()
         {
             int currentIndex = directions.IndexOf(direction);
             int newIndex = (currentIndex + 1) % directions.Count;
@@ -127,7 +127,7 @@ namespace ExplorandoMarte.Models
         /// <summary>
         /// Move o Rover para frente.
         /// </summary>
-        private void MoveForward()
+        public void MoveForward()
         {
             switch (direction)
             {
@@ -148,7 +148,7 @@ namespace ExplorandoMarte.Models
 
         public string GetPosition()
         {
-            return $" X: {PosicaoX} | Y: {PosicaoY} | DIREÇÃO: {direction} ";
+            return $" Nome: {Nome} | X: {PosicaoX} | Y: {PosicaoY} | DIREÇÃO: {direction} ";
         }
 
         public override string ToString()
