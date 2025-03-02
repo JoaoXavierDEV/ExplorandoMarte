@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using ExplorandoMarte.Commands;
+using System.Diagnostics;
 
 namespace ExplorandoMarte.Models
 {
@@ -88,20 +89,31 @@ namespace ExplorandoMarte.Models
         public void ExecutarInstrucao(char instruction)
         {
             ValidateInstruction(instruction);
-            switch (instruction)
+
+            ICommand command = instruction switch
             {
-                case 'L':
-                    TurnLeft();
-                    break;
-                case 'R':
-                    TurnRight();
-                    break;
-                case 'M':
-                    MoveForward();
-                    break;
-                default:
-                    throw new ArgumentException("Instrução inválida. As instruções válidas são: L, R, M.");
-            }
+                'L' => new TurnLeftCommand(this),
+                'R' => new TurnRightCommand(this),
+                'M' => new MoveCommand(this),
+                _ => throw new ArgumentException("Instrução inválida. As instruções válidas são: L, R, M.")
+            };
+
+            command.Execute();
+
+            //switch (instruction)
+            //{
+            //    case 'L':
+            //        TurnLeft();
+            //        break;
+            //    case 'R':
+            //        TurnRight();
+            //        break;
+            //    case 'M':
+            //        MoveForward();
+            //        break;
+            //    default:
+            //        throw new ArgumentException("Instrução inválida. As instruções válidas são: L, R, M.");
+            //}
         }
 
         /// <summary>
