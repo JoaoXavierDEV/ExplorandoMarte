@@ -69,7 +69,6 @@ namespace ExplorandoMarte
                         throw new InvalidOperationException(string.Format("Posição já ocupada por outra sonda Rover {0}.",planalto.ObterRoverPorLocalizacao(x,y).Nome));
                     }
 
-
                     char direction = char.Parse(positionParts[2].ToUpperInvariant());
 
                     var rover = new Rover(x, y, direction);
