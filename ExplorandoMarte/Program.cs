@@ -14,6 +14,7 @@ namespace ExplorandoMarte
        // {
       //  }
 
+        // This is a trigger comment to run the GitHub Actions workflow
         public static void Main(string[] args)
         {
             try
