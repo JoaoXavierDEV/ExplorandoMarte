@@ -96,6 +96,7 @@ namespace ExplorandoMarte
                     {
                         try
                         {
+                            
                             ICommand command = instruction switch
                             {
                                 'L' => new TurnLeftCommand(rover),
@@ -103,6 +104,7 @@ namespace ExplorandoMarte
                                 'M' => new MoveCommand(rover),
                                 _ => throw new ArgumentException("Instrução inválida. As instruções válidas são: L, R, M.")
                             };
+                            
 
                             invoker.AddCommand(command);
 

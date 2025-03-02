@@ -5,6 +5,8 @@ namespace ExplorandoMarte.Tests
 {
     public class RoverTests
     {
+        #region Movimentação básica e mudança de direção. 
+
         [Fact]
         public void Rover_TurnLeft_ChangesDirectionCorrectly()
         {
@@ -98,6 +100,10 @@ namespace ExplorandoMarte.Tests
             Assert.Equal(0, rover.PosicaoY);
         }
 
+        #endregion
+
+        #region Limites do Planalto
+
         [Fact]
         public void Rover_MoveForward_ThrowsException_WhenMovingBeyondNorthBoundary()
         {
@@ -149,5 +155,59 @@ namespace ExplorandoMarte.Tests
             var exception = Assert.Throws<ArgumentException>(() => rover.MoveForward());
             Assert.Equal("O Rover está no limite do planalto, instrução não executada.", exception.Message);
         }
+        #endregion
+
+        #region Conflito de Posição
+        [Fact]
+        public void Rover_MoveForward_ThrowsException_WhenMovingToOccupiedPosition()
+        {
+            // Arrange
+            var planalto = new Planalto(5, 5);
+            var rover1 = new Rover(1, 1, 'N');
+            var rover2 = new Rover(1, 2, 'S');
+            rover1.SetPlanalto(planalto);
+            rover2.SetPlanalto(planalto);
+            planalto.AdicionarRover(rover1);
+            planalto.AdicionarRover(rover2);
+
+            // Act & Assert
+            var exception = Assert.Throws<InvalidOperationException>(() => rover1.MoveForward());
+            Assert.Equal("Movimento inválido: posição já ocupada por outra sonda.", exception.Message);
+        }
+        #endregion
+
+        #region Instruções inválidas
+
+
+        [Fact]
+        public void Rover_ThrowsException_WhenCreatedWithInvalidCoordinates()
+        {
+            // Act & Assert
+            var exception = Assert.Throws<ArgumentException>(() => new Rover(-1, 0, 'N'));
+            Assert.Equal("As coordenadas não podem ser negativas.", exception.Message);
+        }
+
+        [Fact]
+        public void Rover_ThrowsException_WhenCreatedWithInvalidDirection()
+        {
+            // Act & Assert
+            var exception = Assert.Throws<ArgumentException>(() => new Rover(0, 0, 'A'));
+            Assert.Equal("Direção inválida. As direções válidas são: N, E, S, W.", exception.Message);
+        }
+
+        [Fact]
+        public void Rover_ThrowsException_WhenExecutingInvalidInstruction()
+        {
+            // Arrange
+            var rover = new Rover(0, 0, 'N');
+            var planalto = new Planalto(5, 5);
+            rover.SetPlanalto(planalto);
+
+            // Act & Assert
+            var exception = Assert.Throws<ArgumentException>(() => rover.ExecutarInstrucao('X'));
+            Assert.Equal("Instrução inválida. As instruções válidas são: L, R, M.", exception.Message);
+        }
+
+        #endregion
     }
 }
