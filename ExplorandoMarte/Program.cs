@@ -34,7 +34,6 @@ namespace ExplorandoMarte
                     throw new Exception("Coordenadas Inválidas");
                 }
 
-
                 var planalto = new Planalto(upperRightX, upperRightY);
 
                 Controller.Instance.RegistrarLog("Coordenadas do Planalto: " + planalto.ObterCoordenadasSuperiores());

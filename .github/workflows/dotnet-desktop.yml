@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        configuration: [Debug, Release]
+        configuration: [Release]
 
     runs-on: windows-latest
 
@@ -44,5 +44,5 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: Published_EXE_${{ github.run_id }}
+        name: Published_EXE_${{ github.run_id }} env.
         path: ${{ env.Publish_Directory }}
