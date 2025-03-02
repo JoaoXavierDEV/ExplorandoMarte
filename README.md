@@ -1,7 +1,3 @@
-Aqui está um exemplo de README que inclui as informações solicitadas:
-
----
-
 # Explorando Marte
 
 ## Descrição do Problema

@@ -10,11 +10,6 @@ namespace ExplorandoMarte
 {
     public class Program //: Controller
     {
-       // public Program(ILogger logger) : base(logger)
-       // {
-      //  }
-
-        // This is a trigger comment to run the GitHub Actions workflow
         public static void Main(string[] args)
         {
             try
