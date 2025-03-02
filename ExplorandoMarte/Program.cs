@@ -1,4 +1,5 @@
 ﻿using ExplorandoMarte.Controllers;
+using ExplorandoMarte.Interfaces;
 using ExplorandoMarte.Models;
 using System;
 using System.Collections.Generic;
@@ -7,8 +8,16 @@ namespace MarsRovers
 {
     public class Program : MainController
     {
-        static void Main(string[] args)
+        public Program(ILogger logger) : base(logger)
         {
+        }
+
+        public static void Main(string[] args)
+        {
+            ILogger logger = Logger.Instance;
+            // var program = new Program(logger);
+            logger.LogMessage("Iniciando a exploração de Marte...");
+
             // Read the plateau's upper right coordinates
             var plateauCoordinates = Console.ReadLine().Split(' ');
             int upperRightX = int.Parse(plateauCoordinates[0]);

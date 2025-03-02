@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ExplorandoMarte.Interfaces
 {
-    interface ILogger
+    public interface ILogger
     {
-        void LogMessage(string message);
-        void LogError(string message);
+        public void LogMessage(string message);
+        public void LogError(string message);
     }
 }
