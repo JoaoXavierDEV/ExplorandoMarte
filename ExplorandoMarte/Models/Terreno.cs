@@ -1,6 +1,6 @@
 ﻿namespace ExplorandoMarte.Models
 {
-    public abstract class Terreno
+    public abstract class Terreno : EntityBase
     {
         public string Nome { get; private set; }
         public const int CoordenadaMinimaX = 0;

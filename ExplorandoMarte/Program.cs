@@ -43,10 +43,11 @@ namespace MarsRovers
 
                 List<Rover> rovers = new List<Rover>();
 
-                while (true)
+                while (rovers.Count < 2)
                 {
                     Controller.Instance.RegistrarLog("Informe a posição inicial do Rover: ");
 
+                    Console.WriteLine("------------------------------------------------------");
                     Console.WriteLine("Exemplo de posição inicial válida: ");
                     Console.WriteLine("1 2 N");
                     Console.WriteLine("X = 1, Y = 2, Direção = Norte");
@@ -56,14 +57,22 @@ namespace MarsRovers
 
                     if (string.IsNullOrEmpty(initialPosition) || string.IsNullOrWhiteSpace(initialPosition))
                     {
-                        Controller.Instance.RegistrarErro("Posição Inválida para o Rover.");
+                        throw new ArgumentException("Posição Inválida para o Rover.", initialPosition);
                     }
+
 
                     var positionParts = initialPosition.Split(' ');
 
 
                     int x = int.Parse(positionParts[0]);
                     int y = int.Parse(positionParts[1]);
+
+                    if(planalto.PosicaoOcupada(x: x, y: y))
+                    {
+                        throw new InvalidOperationException(string.Format("Posição já ocupada por outra sonda Rover {0}.",planalto.ObterRoverPorLocalizacao(x,y).Nome));
+                    }
+
+
                     char direction = char.Parse(positionParts[2].ToUpperInvariant());
 
                     var rover = new Rover(x, y, direction);

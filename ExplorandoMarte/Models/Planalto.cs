@@ -39,6 +39,16 @@ namespace ExplorandoMarte.Models
             }
         }
 
+        public bool PosicaoOcupada(int x, int y)
+        {
+            return Rovers.Any(r => r.PosicaoX == x && r.PosicaoY == y);
+        }
+
+        public Rover ObterRoverPorLocalizacao(int x, int y)
+        {
+            return Rovers.Find(r => r.PosicaoX == x && r.PosicaoY == y);
+        }
+
 
         public List<string> InformarPosicaoRover()
         {

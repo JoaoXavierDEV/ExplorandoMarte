@@ -2,12 +2,13 @@
 
 namespace ExplorandoMarte.Models
 {
-    public class Rover
+    [DebuggerDisplay("Rover {Nome} - Posição: ({PosicaoX}, {PosicaoY}) - Direção: {direction}")]
+    public class Rover : EntityBase
     {
         #region Propriedades
         public string Nome { get; private set; }
-        private int x;
-        private int y;
+        public int PosicaoX { get; private set; }
+        public int PosicaoY { get; private set; }
 
         public Planalto Planalto { get; private set; }
 
@@ -21,9 +22,9 @@ namespace ExplorandoMarte.Models
             ValidateCoordinates(x, y);
             ValidateDirection(direction);
 
-            this.Nome = Guid.NewGuid().ToString();
-            this.x = x;
-            this.y = y;
+            this.Nome = Guid.NewGuid().ToString().Substring(0,4);
+            this.PosicaoX = x;
+            this.PosicaoY = y;
             this.direction = direction;
         }
 
@@ -52,8 +53,8 @@ namespace ExplorandoMarte.Models
 
             if (instruction == 'M')
             {
-                int newX = x;
-                int newY = y;
+                int newX = PosicaoX;
+                int newY = PosicaoY;
 
                 switch (direction)
                 {
@@ -74,6 +75,11 @@ namespace ExplorandoMarte.Models
                 if (newX < 0 || newX > Planalto.CoordenadaX || newY < 0 || newY > Planalto.CoordenadaY)
                 {
                     throw new ArgumentException("O Rover está no limite do planalto, instrução não executada.");
+                }
+
+                if (Planalto.PosicaoOcupada(newX, newY))
+                {
+                    throw new InvalidOperationException("Movimento inválido: posição já ocupada por outra sonda.");
                 }
             }
         }
@@ -126,23 +132,23 @@ namespace ExplorandoMarte.Models
             switch (direction)
             {
                 case 'N':
-                    y += 1;
+                    PosicaoY += 1;
                     break;
                 case 'E':
-                    x += 1;
+                    PosicaoX += 1;
                     break;
                 case 'S':
-                    y -= 1;
+                    PosicaoY -= 1;
                     break;
                 case 'W':
-                    x -= 1;
+                    PosicaoX -= 1;
                     break;
             }
         }
 
         public string GetPosition()
         {
-            return $" X:{x} | Y:{y} | DIREÇÃO:{direction} ";
+            return $" X: {PosicaoX} | Y: {PosicaoY} | DIREÇÃO: {direction} ";
         }
 
         public override string ToString()
@@ -153,6 +159,11 @@ namespace ExplorandoMarte.Models
         public void SetPlanalto(Planalto planalto)
         {
             Planalto = planalto;
+        }
+
+        public bool PosicaoOcupada(int x, int y)
+        {
+            return Planalto.Rovers.Exists(rover => rover.PosicaoY == y && rover.PosicaoX == x);
         }
     }
 }

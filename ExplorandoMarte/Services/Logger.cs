@@ -45,7 +45,8 @@ namespace ExplorandoMarte.Models
 
         public void LogMessage(string message)
         {
-            WriteLog(message);
+            var logMessage = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} [INFO] {message}";
+            WriteLog(logMessage);
         }
 
         private void WriteLog(string message)
