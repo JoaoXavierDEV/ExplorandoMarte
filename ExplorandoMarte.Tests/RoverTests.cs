@@ -36,6 +36,9 @@ namespace ExplorandoMarte.Tests
         {
             // Arrange
             var rover = new Rover(0, 0, 'N');
+            var planalto = new Planalto(5, 5);
+            rover.SetPlanalto(planalto);
+
 
             // Act
             rover.MoveForward();
@@ -50,6 +53,9 @@ namespace ExplorandoMarte.Tests
         {
             // Arrange
             var rover = new Rover(0, 0, 'E');
+            var planalto = new Planalto(5, 5);
+            rover.SetPlanalto(planalto);
+
 
             // Act
             rover.MoveForward();
@@ -64,6 +70,8 @@ namespace ExplorandoMarte.Tests
         {
             // Arrange
             var rover = new Rover(0, 1, 'S');
+            var planalto = new Planalto(5, 5);
+            rover.SetPlanalto(planalto);
 
             // Act
             rover.MoveForward();
@@ -78,6 +86,9 @@ namespace ExplorandoMarte.Tests
         {
             // Arrange
             var rover = new Rover(1, 0, 'W');
+            var planalto = new Planalto(5, 5);
+            rover.SetPlanalto(planalto);
+
 
             // Act
             rover.MoveForward();

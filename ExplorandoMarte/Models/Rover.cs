@@ -85,24 +85,24 @@ namespace ExplorandoMarte.Models
         }
         #endregion
 
-        public void ExecutarInstrucao(char instruction)
-        {
-            ValidateInstruction(instruction);
-            switch (instruction)
-            {
-                case 'L':
-                    TurnLeft();
-                    break;
-                case 'R':
-                    TurnRight();
-                    break;
-                case 'M':
-                    MoveForward();
-                    break;
-                default:
-                    throw new ArgumentException("Instrução inválida. As instruções válidas são: L, R, M.");
-            }
-        }
+        //public void ExecutarInstrucao(char instruction)
+        //{
+        //    ValidateInstruction(instruction);
+        //    switch (instruction)
+        //    {
+        //        case 'L':
+        //            TurnLeft();
+        //            break;
+        //        case 'R':
+        //            TurnRight();
+        //            break;
+        //        case 'M':
+        //            MoveForward();
+        //            break;
+        //        default:
+        //            throw new ArgumentException("Instrução inválida. As instruções válidas são: L, R, M.");
+        //    }
+        //}
 
         /// <summary>
         /// Gira o Rover para a esquerda.
@@ -129,6 +129,8 @@ namespace ExplorandoMarte.Models
         /// </summary>
         public void MoveForward()
         {
+            ValidateInstruction('M');
+
             switch (Direction)
             {
                 case 'N':
