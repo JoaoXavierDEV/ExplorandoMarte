@@ -91,7 +91,6 @@ namespace ExplorandoMarte
                     {
                         try
                         {
-                            
                             ICommand command = instruction switch
                             {
                                 'L' => new TurnLeftCommand(rover),
