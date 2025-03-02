@@ -2,7 +2,7 @@
 
 namespace ExplorandoMarte.Models
 {
-    [DebuggerDisplay("Rover {Nome} - Posição: ({PosicaoX}, {PosicaoY}) - Direção: {direction}")]
+    [DebuggerDisplay("Rover {Nome} - Posição: ({PosicaoX}, {PosicaoY}) - Direção: {Direction}")]
     public class Rover : EntityBase
     {
         #region Propriedades
@@ -12,7 +12,7 @@ namespace ExplorandoMarte.Models
 
         public Planalto Planalto { get; private set; }
 
-        private char direction;
+        public char Direction;
 
         private static readonly List<char> directions = new List<char> { 'N', 'E', 'S', 'W' }; 
         #endregion
@@ -25,7 +25,7 @@ namespace ExplorandoMarte.Models
             this.Nome = Guid.NewGuid().ToString().Substring(0,6).ToUpperInvariant();
             this.PosicaoX = x;
             this.PosicaoY = y;
-            this.direction = direction;
+            this.Direction = direction;
         }
 
         #region Validações
@@ -56,7 +56,7 @@ namespace ExplorandoMarte.Models
                 int newX = PosicaoX;
                 int newY = PosicaoY;
 
-                switch (direction)
+                switch (Direction)
                 {
                     case 'N':
                         newY += 1;
@@ -109,9 +109,9 @@ namespace ExplorandoMarte.Models
         /// </summary>
         public void TurnLeft()
         {
-            int currentIndex = directions.IndexOf(direction);
+            int currentIndex = directions.IndexOf(Direction);
             int newIndex = (currentIndex - 1 + directions.Count) % directions.Count;
-            direction = directions[newIndex];
+            Direction = directions[newIndex];
         }
 
         /// <summary>
@@ -119,9 +119,9 @@ namespace ExplorandoMarte.Models
         /// </summary>
         public void TurnRight()
         {
-            int currentIndex = directions.IndexOf(direction);
+            int currentIndex = directions.IndexOf(Direction);
             int newIndex = (currentIndex + 1) % directions.Count;
-            direction = directions[newIndex];
+            Direction = directions[newIndex];
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace ExplorandoMarte.Models
         /// </summary>
         public void MoveForward()
         {
-            switch (direction)
+            switch (Direction)
             {
                 case 'N':
                     PosicaoY += 1;
@@ -148,7 +148,7 @@ namespace ExplorandoMarte.Models
 
         public string GetPosition()
         {
-            return $" Nome: {Nome} | X: {PosicaoX} | Y: {PosicaoY} | DIREÇÃO: {direction} ";
+            return $" Nome: {Nome} | X: {PosicaoX} | Y: {PosicaoY} | DIREÇÃO: {Direction} ";
         }
 
         public override string ToString()

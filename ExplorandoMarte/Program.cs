@@ -119,7 +119,7 @@ namespace ExplorandoMarte
                     rovers.Add(rover);
                 }
 
-                // Output the final position and direction of each rover
+                // Output the final position and Direction of each rover
                 foreach (var rover in rovers)
                 {
                     Console.WriteLine(rover.GetPosition());
