@@ -53,5 +53,11 @@ namespace ExplorandoMarte.Models
             // Adiciona mensagem de log ao arquivo, codificação UTF-8
             File.AppendAllText(_logFilePath, message + Environment.NewLine, Encoding.UTF8);
         }
+
+        public void ClearLog()
+        {
+            // Limpa o conteúdo do arquivo de log
+            File.WriteAllText(_logFilePath, string.Empty, Encoding.UTF8);
+        }
     }
 }

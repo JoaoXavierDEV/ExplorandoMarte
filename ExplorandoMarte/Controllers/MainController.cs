@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ExplorandoMarte.Controllers
 {
-    public abstract class MainController
+    public abstract class MainController : IController
     {
         private readonly ILogger _logger;
 
@@ -16,9 +16,19 @@ namespace ExplorandoMarte.Controllers
             _logger = logger;
         }
 
-        public static void RegistrarLog(string mensagem)
+        public virtual void RegistrarLog(string mensagem)
         {
-            Console.WriteLine(mensagem);
+            Console.WriteLine(mensagem); _logger.LogMessage(mensagem);
+        }
+
+        public virtual void RegistrarErro(string mensagem)
+        {
+            Console.WriteLine(mensagem); _logger.LogError(mensagem);
+        }
+
+        public virtual void LimparLog()
+        {
+            _logger.ClearLog();
         }
     }
 }

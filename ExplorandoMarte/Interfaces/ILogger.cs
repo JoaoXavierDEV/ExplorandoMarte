@@ -10,5 +10,6 @@ namespace ExplorandoMarte.Interfaces
     {
         public void LogMessage(string message);
         public void LogError(string message);
+        public void ClearLog();
     }
 }
