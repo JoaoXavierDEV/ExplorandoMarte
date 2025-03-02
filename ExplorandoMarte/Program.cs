@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace ExplorandoMarte
 {
-    public class Program //: Controller
+    public class Program
     {
         public static void Main(string[] args)
         {

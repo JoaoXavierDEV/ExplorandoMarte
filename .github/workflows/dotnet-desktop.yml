@@ -16,10 +16,9 @@ jobs:
     runs-on: windows-latest
 
     env:
-      Solution_Name: ExplorandoMarte.sln    # Nome da solução
-      Test_Project_Path: ExplorandoMarte.Tests/ExplorandoMarte.Tests.csproj  # Caminho para o projeto de testes 
-      Wap_Project_Directory: ExplorandoMarte  # Defina o diretório do projeto WAP
-      Wap_Project_Path: ExplorandoMarte/ExplorandoMarte.csproj  # Defina o caminho do projeto WAP
+      Solution_Name: ExplorandoMarte.sln                         # Nome da solução
+      Test_Project_Path: ExplorandoMarte.Tests/ExplorandoMarte.Tests.csproj  # Caminho para o projeto de testes
+      Publish_Directory: ExplorandoMarte/publish  # Diretório de publicação
 
     steps:
     - name: Checkout code
@@ -38,3 +37,13 @@ jobs:
 
     - name: Run tests
       run: dotnet test ${{ env.Test_Project_Path }} --configuration ${{ matrix.configuration }} --no-restore --verbosity normal
+
+    - name: Publish
+      run: dotnet publish ${{ env.Solution_Name }} --configuration ${{ matrix.configuration }} --output ${{ env.Publish_Directory }}
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: Published EXE
+        path: ${{ env.Publish_Directory }}
+
