@@ -7,11 +7,10 @@ namespace ExplorandoMarte.Models
 {
     public class Logger : ILogger
     {
-        private static Logger _instance;
         private static readonly object _lock = new object();
         private readonly string _logFilePath;
 
-        private Logger()
+        public Logger()
         {
             // Define o caminho do arquivo de log
             string logDirectory = @"C:\ExplorandoMarte\logs";
@@ -20,21 +19,6 @@ namespace ExplorandoMarte.Models
                 Directory.CreateDirectory(logDirectory); // Cria o diretório se ele não existir
             }
             _logFilePath = Path.Combine(logDirectory, "log.txt");
-        }
-
-        public static Logger Instance
-        {
-            get
-            {
-                lock (_lock)
-                {
-                    if (_instance == null)
-                    {
-                        _instance = new Logger();
-                    }
-                    return _instance;
-                }
-            }
         }
 
         public void LogError(string message)

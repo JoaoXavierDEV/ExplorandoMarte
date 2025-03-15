@@ -9,6 +9,7 @@ namespace ExplorandoMarte.Interfaces
 {
     public interface IController
     {
+        public void InicializarLog();
         public void RegistrarLog(string mensagem);
 
         public void RegistrarErro(string mensagem);
